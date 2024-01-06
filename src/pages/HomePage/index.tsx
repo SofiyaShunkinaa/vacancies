@@ -14,7 +14,8 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
-import Header from '../components/Header';
+import Header from '../../components/Header';
+import FilterBar from '../../components/FilterBar';
 
 
 
@@ -22,8 +23,7 @@ const HomePage = () => {
     return (     
         <Box>
             <Header />
-            <Box>
-            <Typography variant='h1'>Homepage</Typography></Box>
+            <FilterBar />
         </Box>
     )
 };
