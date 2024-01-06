@@ -1,0 +1,12 @@
+.header{
+    background-color: #00000008;
+}
+
+.logo{
+    flex-grow: 1;
+}
+
+.nav{
+    flex-grow: 2;
+    padding-left: 90px;
+}
