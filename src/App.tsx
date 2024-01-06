@@ -1,17 +1,28 @@
 import React from 'react';
-import {Box} from "@mui/material";
+import { Box } from "@mui/material";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Header from './pages/components/Header';
+import { routesConfig } from './routes/routesConfig'; 
 
 function App() {
-    // const [jobs, setJobs] = useState();
-    // useEffect(() => {
-    //     fetch('https://api.hh.ru/vacancies?text=FrontEnd').then(res => res.json()).then(data => setJobs(data))
-    // }, [])
-    // console.log(jobs)
     return (
-        <Box>
-            <Box></Box>
-            <Box>Hi</Box>
-        </Box>
+        <Router>
+            <Box>
+                <Header />
+                <Routes>
+                    {routesConfig.map((route, index) => (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={route.element}
+
+                        />
+                    ))}
+                </Routes>
+            </Box>
+        </Router>
+        
     );
 }
 

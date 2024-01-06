@@ -14,14 +14,17 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
-import Header from '../../components/Header'
+import Header from '../components/Header';
 
 
 
-export default function Create(){
-    return(        
-        <div>
-            <Header/>
-        </div>
+const HomePage = () => {
+    return (     
+        <Box>
+            <Header />
+            <Box>
+            <Typography variant='h1'>Homepage</Typography></Box>
+        </Box>
     )
 };
+export default HomePage;
