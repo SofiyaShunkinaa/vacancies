@@ -9,7 +9,17 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import { margin } from '@mui/system';
 import TextField from '@mui/material/TextField';
 import s from './FilterBar.module.css';
-//import NearMeIcon from '@mui/icons-material/NearMe';
+import NearMeIcon from '@mui/icons-material/NearMe';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import WorkIcon from '@mui/icons-material/Work';
+import StarIcon from '@mui/icons-material/Star';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 const FilterBar: React.FC = () => {
     const optionsTime = ['Полный день', 'Гибкий график', 'Удаленная работа'];
@@ -17,53 +27,98 @@ const FilterBar: React.FC = () => {
     const optionsExperience = ['Полный день', 'Гибкий график', 'Удаленная работа'];
 
     const [open, setOpen] = React.useState(false);
-    const anchorRef = React.useRef<HTMLDivElement>(null);
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const anchorRef = React.useRef<HTMLDivElement>(null);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-    const handleClick = () => {
-        console.info(`You clicked ${optionsTime[selectedIndex]}`);
-    };
-    
-    const handleMenuItemClick = (
-        event: React.MouseEvent<HTMLLIElement, MouseEvent>,
-        index: number,
-    ) => {
-        setSelectedIndex(index);
-        setOpen(false);
-    };
+  const handleClick = () => {
+    console.info(`You clicked ${optionsTime[selectedIndex]}`);
+  };
 
-    const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
+  const handleMenuItemClick = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    index: number,
+  ) => {
+    setSelectedIndex(index);
+    setOpen(false);
+  };
 
-    const handleClose = (event: Event) => {
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event: Event) => {
     if (
-        anchorRef.current &&
-        anchorRef.current.contains(event.target as HTMLElement)
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
     ) {
-        return;
+      return;
     }
 
     setOpen(false);
-    };
+  };
 
     return(
         <div style={{margin:'150px 0px'}}>
-        <Container>
-            <ButtonGroup variant="text" aria-label="text button group" size='large' className={s.filterbar}>
-                
-                <Button >
-                    <TextField variant="outlined" />
-                </Button>
-                <Button>Two</Button>
-                <Button>Three</Button>
-                <Button>One</Button>
-                <Button>
-                    <TextField variant="outlined" />
-                </Button>
-                <Button variant='contained'>Поиск</Button>
-            </ButtonGroup>
-        </Container>
+            <Container>
+                <ButtonGroup variant="text" aria-label="text button group" size='large' className={s.filterbar}>
+                    
+                    <Button startIcon={<NearMeIcon />} >
+                        <TextField variant="outlined" defaultValue='Москва'/>
+                    </Button>
+                    <Button 
+                    startIcon={<AccessTimeFilledIcon />}
+                    aria-controls={open ? 'split-button-menu' : undefined}
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-label="select merge strategy"
+                    aria-haspopup="menu"
+                    onClick={handleToggle}>
+                        {optionsTime[selectedIndex]}
+                    </Button>
+                    <Button startIcon={<WorkIcon />}>Three</Button>
+                    <Button startIcon={<StarIcon />}>One</Button>
+                    <Button startIcon={<LocalOfferIcon />}>
+                        <TextField variant="outlined" defaultValue='150000'/>
+                    </Button>
+                    <Button variant='contained'>Поиск</Button>
+                </ButtonGroup>
+                <Popper
+        sx={{
+          zIndex: 1,
+        }}
+        open={open}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        transition
+        disablePortal
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin:
+                placement === 'bottom' ? 'center top' : 'center bottom',
+            }}
+          >
+            <Paper>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList id="split-button-menu" autoFocusItem>
+                  {optionsTime.map((option, index) => (
+                    <MenuItem
+                      key={option}
+                      disabled={index === 2}
+                      selected={index === selectedIndex}
+                      onClick={(event) => handleMenuItemClick(event, index)}
+                    >
+                      {option}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
+            </Container>
         </div>
     )
 }
