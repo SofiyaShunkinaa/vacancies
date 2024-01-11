@@ -27,31 +27,31 @@ const FilterBar: React.FC = () => {
     const optionsExperience = ['Полный день', 'Гибкий график', 'Удаленная работа'];
 
     const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLDivElement>(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const anchorRef = React.useRef<HTMLDivElement>(null);
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-  const handleMenuItemClick = (
-    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    index: number,
-  ) => {
-    setSelectedIndex(index);
-    setOpen(false);
-  };
+    const handleMenuItemClick = (
+        event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+        index: number,
+    ) => {
+        setSelectedIndex(index);
+        setOpen(false);
+    };
 
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
 
-  const handleClose = (event: Event) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
+    const handleClose = (event: Event) => {
+        if (
+        anchorRef.current &&
+        anchorRef.current.contains(event.target as HTMLElement)
+        ) {
+        return;
+        }
 
-    setOpen(false);
-  };
+        setOpen(false);
+    };
 
     return(
         <div style={{margin:'150px 0px'}}>
