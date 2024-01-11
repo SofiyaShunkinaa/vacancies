@@ -81,7 +81,16 @@ const FilterBar: React.FC = () => {
                     onClick={handleToggle}>
                         {optionsWork[selectedIndex]}
                     </Button>
-                    <Button startIcon={<StarIcon />}>One</Button>
+                    <Button 
+                    startIcon={<StarIcon />}
+                    
+                    aria-controls={open ? 'button-menu-time' : undefined}
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-label="select merge strategy"
+                    aria-haspopup="menu"
+                    onClick={handleToggle}>
+                        {optionsExperience[selectedIndex]}
+                        </Button>
                     <Button startIcon={<LocalOfferIcon />}>
                         <TextField variant="outlined" defaultValue='150000'/>
                     </Button>
@@ -89,55 +98,69 @@ const FilterBar: React.FC = () => {
                 </ButtonGroup>
 
                 <Popper
-        sx={{
-          zIndex: 1,
-        }}
-        open={open}
-        anchorEl={anchorRef.current}
-        role={undefined}
-        transition
-        disablePortal
-      >
-        {({ TransitionProps, placement }) => (
-          <Grow
-            {...TransitionProps}
-            style={{
-              transformOrigin:
-                placement === 'bottom' ? 'center top' : 'center bottom',
-            }}
-          >
-            <Paper>
-              <ClickAwayListener onClickAway={handleClose}>
-                <MenuList id="button-menu-time" autoFocusItem>
-                  {optionsTime.map((option, index) => (
-                    <MenuItem
-                      key={option}
-                      selected={index === selectedIndex}
-                      onClick={(event) => handleMenuItemClick(event, index)}
+                    sx={{
+                    zIndex: 1,
+                    }}
+                    open={open}
+                    anchorEl={anchorRef.current}
+                    role={undefined}
+                    transition
+                    disablePortal
+                >
+                    {({ TransitionProps, placement }) => (
+                    <Grow
+                        {...TransitionProps}
+                        style={{
+                        transformOrigin:
+                            placement === 'bottom' ? 'center top' : 'center bottom',
+                        }}
                     >
-                      {option}
-                    </MenuItem>
-                  ))}
-                </MenuList>
-                </ClickAwayListener>
+                        <Paper>
+                        <ClickAwayListener onClickAway={handleClose}>
+                            <MenuList id="button-menu-time" autoFocusItem>
+                            {optionsTime.map((option, index) => (
+                                <MenuItem
+                                key={option}
+                                selected={index === selectedIndex}
+                                onClick={(event) => handleMenuItemClick(event, index)}
+                                >
+                                {option}
+                                </MenuItem>
+                            ))}
+                            </MenuList>
+                            </ClickAwayListener>
 
-                <ClickAwayListener onClickAway={handleClose}>
-                <MenuList id="button-menu-work" autoFocusItem>
-                  {optionsWork.map((option, index) => (
-                    <MenuItem
-                      key={option}
-                      selected={index === selectedIndex}
-                      onClick={(event) => handleMenuItemClick(event, index)}
-                    >
-                      {option}
-                    </MenuItem>
-                  ))}
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
-      </Popper>
+                            <ClickAwayListener onClickAway={handleClose}>
+                            <MenuList id="button-menu-work" autoFocusItem>
+                            {optionsWork.map((option, index) => (
+                                <MenuItem
+                                key={option}
+                                selected={index === selectedIndex}
+                                onClick={(event) => handleMenuItemClick(event, index)}
+                                >
+                                {option}
+                                </MenuItem>
+                            ))}
+                            </MenuList>
+                        </ClickAwayListener>
+
+                        <ClickAwayListener onClickAway={handleClose}>
+                            <MenuList id="button-menu-experience" autoFocusItem>
+                            {optionsExperience.map((option, index) => (
+                                <MenuItem
+                                key={option}
+                                selected={index === selectedIndex}
+                                onClick={(event) => handleMenuItemClick(event, index)}
+                                >
+                                {option}
+                                </MenuItem>
+                            ))}
+                            </MenuList>
+                        </ClickAwayListener>
+                        </Paper>
+                    </Grow>
+                    )}
+                </Popper>
 
       
             </Container>
