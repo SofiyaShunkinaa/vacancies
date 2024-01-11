@@ -30,10 +30,6 @@ const FilterBar: React.FC = () => {
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-  const handleClick = () => {
-    console.info(`You clicked ${optionsTime[selectedIndex]}`);
-  };
-
   const handleMenuItemClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
     index: number,
@@ -124,7 +120,7 @@ const FilterBar: React.FC = () => {
                   ))}
                 </MenuList>
                 </ClickAwayListener>
-                
+
                 <ClickAwayListener onClickAway={handleClose}>
                 <MenuList id="button-menu-work" autoFocusItem>
                   {optionsWork.map((option, index) => (
