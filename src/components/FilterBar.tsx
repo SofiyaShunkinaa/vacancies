@@ -67,20 +67,31 @@ const FilterBar: React.FC = () => {
                     </Button>
                     <Button 
                     startIcon={<AccessTimeFilledIcon />}
-                    aria-controls={open ? 'split-button-menu' : undefined}
+
+                    aria-controls={open ? 'button-menu-time' : undefined}
                     aria-expanded={open ? 'true' : undefined}
                     aria-label="select merge strategy"
                     aria-haspopup="menu"
                     onClick={handleToggle}>
                         {optionsTime[selectedIndex]}
                     </Button>
-                    <Button startIcon={<WorkIcon />}>Three</Button>
+                    <Button 
+                    startIcon={<WorkIcon />}
+
+                    aria-controls={open ? 'button-menu-time' : undefined}
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-label="select merge strategy"
+                    aria-haspopup="menu"
+                    onClick={handleToggle}>
+                        {optionsWork[selectedIndex]}
+                    </Button>
                     <Button startIcon={<StarIcon />}>One</Button>
                     <Button startIcon={<LocalOfferIcon />}>
                         <TextField variant="outlined" defaultValue='150000'/>
                     </Button>
                     <Button variant='contained'>Поиск</Button>
                 </ButtonGroup>
+
                 <Popper
         sx={{
           zIndex: 1,
@@ -101,8 +112,22 @@ const FilterBar: React.FC = () => {
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList id="split-button-menu" autoFocusItem>
+                <MenuList id="button-menu-time" autoFocusItem>
                   {optionsTime.map((option, index) => (
+                    <MenuItem
+                      key={option}
+                      selected={index === selectedIndex}
+                      onClick={(event) => handleMenuItemClick(event, index)}
+                    >
+                      {option}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+                </ClickAwayListener>
+                
+                <ClickAwayListener onClickAway={handleClose}>
+                <MenuList id="button-menu-work" autoFocusItem>
+                  {optionsWork.map((option, index) => (
                     <MenuItem
                       key={option}
                       selected={index === selectedIndex}
@@ -117,6 +142,8 @@ const FilterBar: React.FC = () => {
           </Grow>
         )}
       </Popper>
+
+      
             </Container>
         </div>
     )
