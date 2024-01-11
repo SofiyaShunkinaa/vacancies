@@ -1,0 +1,17 @@
+.filterbar button{
+    flex: 1;
+}
+
+.filterbar fieldset{
+    border: none;
+}
+
+.filterbar button:last-of-type{
+    flex: none;
+    border-radius: 0 10px 10px 0;
+}
+
+.filterbar{
+    width: 100%;
+    border-radius: 10px;
+}
