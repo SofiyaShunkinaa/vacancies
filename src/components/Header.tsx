@@ -44,7 +44,7 @@ const Header: React.FC = () => {
                   <Link 
                   to={page.link} 
                   style={{ textDecoration: 'none', color: 'inherit' }}
-                  className={location.pathname == page.link ? s.active : ""}
+                  className={location.pathname == page.link ? s.actiive : ""}
                   >
                     {page.name}
                   </Link>
